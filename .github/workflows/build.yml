@@ -4,18 +4,27 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    # Checkout code (Updated to v4)
+    - uses: actions/checkout@v4
+    
+    # Setup Python (Updated to v5)
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.9'
+        
+    # Install Libraries
     - name: Install dependencies
       run: |
         pip install pyinstaller opencv-python mediapipe pyautogui numpy
+        
+    # Compile .exe
     - name: Build with PyInstaller
       run: pyinstaller --onefile --noconsole gesture_mouse.py
+      
+    # Upload Result (Updated to v4 to fix your error)
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gesture-mouse-app
         path: dist/gesture_mouse.exe
